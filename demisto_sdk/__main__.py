@@ -25,6 +25,7 @@ from demisto_sdk.commands.generate_test_playbook.test_playbook_generator import 
 from demisto_sdk.commands.generate_docs.generate_integration_doc import generate_integration_doc
 from demisto_sdk.commands.generate_docs.generate_script_doc import generate_script_doc
 from demisto_sdk.commands.generate_docs.generate_playbook_doc import generate_playbook_doc
+from demisto_sdk.commands.aws_codegen
 
 # Common tools
 from demisto_sdk.commands.common.tools import print_error, print_warning, get_last_remote_release_version
@@ -499,6 +500,29 @@ def generate_test_playbook(**kwargs):
 @click.option(
     '--script', is_flag=True, help="Create a script based on HelloWorldScript example")
 @click.option("--pack", is_flag=True, help="Create pack and its sub directories")
+def init(**kwargs):
+    initiator = Initiator(**kwargs)
+    initiator.init()
+    return 0
+
+
+# ====================== aws_codegen ====================== #
+# TODO update this
+@main.command(name="aws_codegen", short_help="Utility to generate an AWS integration from a spec file.")
+@click.help_option(
+    '-h', '--help'
+)
+@click.option('-d', '--directory', help='The working directory for the tool.',
+              required=True)
+@click.option('-f', '--file', help='The filename of a specific file you want to generate '
+              'an integration with. If none is selected, the tool will iterate over all JSON files '
+                                   'in the working directory',
+              default=None)
+@click.option(
+    "-o", "--output-dir", help="The output dir to write the object into. The default one is the current working "
+                               "directory.")
+def aws_codegen(**kwargs):
+    codegen =
 def init(**kwargs):
     initiator = Initiator(**kwargs)
     initiator.init()
