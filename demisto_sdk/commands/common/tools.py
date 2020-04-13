@@ -143,7 +143,8 @@ def get_remote_file(full_file_path, tag='master'):
         details = {}
         try:
             details = yaml.safe_load(res.content)
-        except Exception:
+        except Exception as e:
+            print_warning(f"#######################################here{str(e)}")
             print(full_file_path)
     # if neither yml nor json then probably a CHANGELOG or README file.
     else:
