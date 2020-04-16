@@ -1,4 +1,5 @@
 # STD python packages
+import logging
 import os
 from pathlib import Path
 from typing import List
@@ -6,6 +7,7 @@ from typing import List
 # Third party packages
 # Local imports
 
+logger = logging.getLogger('demisto-sdk')
 excluded_files = ["CommonServerPython.py", "demistomock.py", "CommonServerUserPython.py", "conftest.py", "venv"]
 
 
@@ -170,7 +172,12 @@ def build_pytest_command(test_xml: str = "", json: bool = False) -> str:
     Returns:
         str: pytest command
     """
-    command = "python -m pytest"
+    # Check verbosity level
+    verbosity = ''
+    if logger.level <= 40:
+        verbosity = '-vv'
+
+    command = f"python -m pytest {verbosity}"
     # Generating junit-xml report - used in circle ci
     if test_xml:
         command += f" --junitxml=/devwork/report_pytest.xml"
