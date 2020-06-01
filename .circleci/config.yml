@@ -18,7 +18,7 @@ jobs:
               echo 'export DEMISTO_README_VALIDATION=true' >> $BASH_ENV
               echo "Parameters: FAKE_MASTER: $FAKE_MASTER DEMISTO_README_VALIDATION: $DEMISTO_README_VALIDATION"
               # Install node packages
-              npm install .
+              sudo npm install npm -g
         - run:
             name: Tox build
             command: |
