@@ -15,7 +15,8 @@ jobs:
         - run:
             name: Print environment variables
             command: |
-              echo "Parameters: FAKE_MASTER: $FAKE_MASTER"
+              echo 'export DEMISTO_README_VALIDATION=true' >> $BASH_ENV
+              echo "Parameters: FAKE_MASTER: $FAKE_MASTER DEMISTO_README_VALIDATION: $DEMISTO_README_VALIDATION"
         - run:
             name: Tox build
             command: |
@@ -38,6 +39,7 @@ jobs:
               coveralls
         - run:
             name: Test validate files and yaml
+            when: always
             command: |
               . .tox/py37/bin/activate
               git clone https://github.com/demisto/content.git
