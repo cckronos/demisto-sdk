@@ -20,6 +20,7 @@ def mock_structure(file_path=None, current_file=None, old_file=None):
         return structure
 
 
+
 data_is_valid_version = [
     (-1, True),
     (0, False),
